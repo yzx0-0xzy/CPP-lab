@@ -10,10 +10,11 @@ int M;//N*M的棋盘，棋盘的下标从0开始
 struct Point {
 	int x, y;
 };
+int level_m[3][3] = { 100,200,400,100,200,800,200,400,10000 }, level;
 
 //ai函数,传入棋盘数组和可下棋点的坐标数组，返回ai下子点
 Point Ai(vector<int> cb[], vector<Point> xy) {
-	const int m1 = 200, m2 = 400, m3 = 10000;
+	const int m1 = level_m[level][0], m2= level_m[level][1], m3 = level_m[level][2];
 	const int c1 = 220, c2 = 450, c3 = 100000;
 	int num = xy.size();
 	vector<int> computerWin, myWin;
@@ -247,8 +248,11 @@ bool ifWin(vector<int> cb[], int player) {
 }
 
 int main() {
-	cout << "Input the size of the chessboard(N*M):" << endl;
+	cout << "Input the size of the chessboard(N*M, Separated by space):" << endl;
 	cin >> N >> M;
+	cout << "Input the difficulty level(1,2,3):" << endl;
+	cin >> level;
+	--level;
 	vector<int> ChessBoard[N_max];
 	for (int i = 0; i < N; ++i) ChessBoard[i].resize(M, 0);
 	print(ChessBoard);
